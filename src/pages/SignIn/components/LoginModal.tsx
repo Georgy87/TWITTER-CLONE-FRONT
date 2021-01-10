@@ -35,7 +35,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }): React.
     const onSubmit = (data: LoginFormProps) => {
         console.log(data);
     }
-//sdfsdfsdfsdfsdfsdfsfsdfsdfsdfsdfsdfdgdfgfdgdfgsdfsdfsf
+
     return (
         <ModalBlock
             visible={open}
