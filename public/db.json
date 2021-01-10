@@ -1,0 +1,139 @@
+{
+  "tweets": [
+    {
+      "id": 1,
+      "_id": "b7s2b42jzdm",
+      "text": "Привет!",
+      "user": {
+        "fullname": "Gosha",
+        "username": "villarreal",
+        "avatarUrl": "https://source.unsplash.com/random/100x100?5"
+      }
+    },
+    {
+      "_id": "z1chb399zlc",
+      "text": "Здорова!!!!!",
+      "user": {
+        "fullname": "Gosha",
+        "username": "villarreal",
+        "avatarUrl": "https://sourse.unsplash.com/random/100x100?5"
+      },
+      "id": 2
+    },
+    {
+      "_id": "ilq85zespsp",
+      "text": "asdasdasdas",
+      "user": {
+        "fullname": "Gosha",
+        "username": "villarreal",
+        "avatarUrl": "https://sourse.unsplash.com/random/100x100?5"
+      },
+      "id": 3
+    },
+    {
+      "_id": "pjrcbwvljef",
+      "text": "jhjk",
+      "user": {
+        "fullname": "Gosha",
+        "username": "villarreal",
+        "avatarUrl": "https://sourse.unsplash.com/random/100x100?5"
+      },
+      "id": 4
+    },
+    {
+      "_id": "dy93fpni7t7",
+      "text": "asda",
+      "user": {
+        "fullname": "Gosha",
+        "username": "villarreal",
+        "avatarUrl": "https://sourse.unsplash.com/random/100x100?"
+      },
+      "id": 5
+    },
+    {
+      "_id": "upskqqfmyoq",
+      "text": "ddddddddd",
+      "user": {
+        "fullname": "Gosha",
+        "username": "villarreal",
+        "avatarUrl": "https://sourse.unsplash.com/random/100x100?"
+      },
+      "id": 6
+    },
+    {
+      "_id": "1mfis4h5h35",
+      "text": "последний",
+      "user": {
+        "fullname": "Gosha",
+        "username": "villarreal",
+        "avatarUrl": "https://sourse.unsplash.com/random/100x100?"
+      },
+      "id": 7
+    },
+    {
+      "_id": "8h26xs8dhw",
+      "text": "Ну да",
+      "user": {
+        "fullname": "Gosha",
+        "username": "villarreal",
+        "avatarUrl": "https://sourse.unsplash.com/random/100x100?"
+      },
+      "id": 8
+    },
+    {
+      "_id": "vwfqyszavu",
+      "text": "sdfsdfsd",
+      "user": {
+        "fullname": "Gosha",
+        "username": "villarreal",
+        "avatarUrl": "https://sourse.unsplash.com/random/100x100?"
+      },
+      "id": 9
+    }
+  ],
+  "tags": [
+    {
+      "_id": "1",
+      "name": "#moscow",
+      "count": 43
+    },
+    {
+      "_id": "2",
+      "name": "#navalnii",
+      "count": 12
+    },
+    {
+      "_id": "3",
+      "name": "#gitler",
+      "count": 56
+    },
+    {
+      "_id": "4",
+      "name": "#belarus",
+      "count": 89
+    }
+  ],
+  "users": [
+    {
+      "fullname": "Cleo Quinn",
+      "username": "houston",
+      "avatarUrl": "https://source.unsplash.com/random/100x100?3"
+    },
+    {
+      "fullname": "Paige Baird",
+      "username": "brittney",
+      "avatarUrl": "https://source.unsplash.com/random/100x100?5"
+    },
+    {
+      "fullname": "Joan Delacruz",
+      "username": "mcpherson",
+      "avatarUrl": "https://source.unsplash.com/random/100x100?3"
+    }
+  ],
+  "user": {
+    "_id": "5fd4e86dc38b21825969305b",
+    "fullname": "Georgy Petrenko",
+    "username": "goshana87",
+    "avatarUrl": "https://i.pinimg.com/736x/a3/1b/e6/a31be6c5d7e8c8a66c11b7f985b21b3a--variety-magazine-fashion-guys.jpg"
+  }
+}
