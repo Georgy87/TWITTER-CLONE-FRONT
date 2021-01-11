@@ -3,7 +3,6 @@ import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
-
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -22,11 +21,15 @@ interface LoginModalProps {
 }
 
 export interface LoginFormProps {
+    fullname: string;
+    username: string;
     email: string;
     password: string;
 }
 
 const LoginFormSchema = yup.object().shape({
+    fullname: yup.string().required('Введите свое полное имя'),
+    username: yup.string().required('Введите логин'),
     email: yup.string().email('Неверная почта').required('Введите почту'),
     password: yup.string().min(6, '​Минимальная длина пароля 6 символов').required(),
 });

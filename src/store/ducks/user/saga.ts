@@ -11,6 +11,7 @@ export function* fetchSignInRequest({ payload }: FetchSignInActionInterface) {
         window.localStorage.setItem('token', data.data.token);
     } catch (error) {
         yield put(setUserLoadingStatus(LoadingStatus.ERROR));
+        window.localStorage.removeItem('token');
     }
 }
 
