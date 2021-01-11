@@ -1,7 +1,7 @@
 import { Action } from "redux";
 import { TweetActionsType } from "../tweet/actionTypes";
-import { FetchTweetsActionInterface, SetTweetsActionInterface, SetTweetsLoadingStateActionInterface, TweetsActionsType,  FetchAddTweetActionInterface, AddTweetActionInterface, SetAddFormStateActionInterface } from "./actionTypes";
-import { AddFormState, LoadingState, Tweet, TweetsState } from "./contracts/state";
+import { FetchTweetsActionInterface, SetTweetsActionInterface, SetTweetsLoadingStatusActionInterface, TweetsActionsType,  FetchAddTweetActionInterface, AddTweetActionInterface, SetAddFormStateActionInterface } from "./actionTypes";
+import { AddFormState, LoadingStatus, Tweet, TweetsState } from "./contracts/state";
 
 export const setTweets = (payload: TweetsState['items']): SetTweetsActionInterface  => ({
     type: TweetsActionsType.SET_TWEETS,
@@ -22,7 +22,7 @@ export const fetchTweets = (): FetchTweetsActionInterface  => ({
     type: TweetsActionsType.FETCH_TWEETS,
 });
 
-export const setTweetsLoadingState = (payload: LoadingState): SetTweetsLoadingStateActionInterface  => ({
+export const setTweetsLoadingStatus = (payload: LoadingStatus): SetTweetsLoadingStatusActionInterface  => ({
     type: TweetsActionsType.SET_LOADING_STATE,
     payload
 });

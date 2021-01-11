@@ -1,8 +1,8 @@
 import axios from "axios";
-import {addTweet, setAddFormState, setTweetsLoadingState} from './actionsCreatores';
+import {addTweet, setAddFormState, setTweetsLoadingStatus} from './actionsCreatores';
 import { all, call, put, takeEvery, takeLatest } from 'redux-saga/effects';
 import { TweetsApi } from '../../../services/api/tweetsApi';
-import { AddFormState, LoadingState } from "./contracts/state";
+import { AddFormState, LoadingStatus } from "./contracts/state";
 import {setTweets} from "./actionsCreatores";
 import {  FetchAddTweetActionInterface, TweetsActionsType } from "./actionTypes";
 
@@ -11,7 +11,7 @@ export function* fetchTweetsRequest() {
         const items = yield call(TweetsApi.fetchTweets);
         yield put(setTweets(items));
     } catch (error) {
-        yield put(setTweetsLoadingState(LoadingState.ERROR));
+        yield put(setTweetsLoadingStatus(LoadingStatus.ERROR));
     }
 }
 

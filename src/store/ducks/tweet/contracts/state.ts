@@ -1,6 +1,6 @@
-import { LoadingState, Tweet } from "../../tweets/contracts/state"
+import { LoadingStatus, Tweet } from "../../tweets/contracts/state"
 
 export type TweetDataState = {
     tweet?: Tweet;
-    loadingState: LoadingState;
+    LoadingStatus: LoadingStatus;
 }

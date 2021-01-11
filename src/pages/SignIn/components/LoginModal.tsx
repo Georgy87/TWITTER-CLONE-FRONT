@@ -1,19 +1,20 @@
+import React from 'react'
 import Button from '@material-ui/core/Button';
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import TextField from '@material-ui/core/TextField';
-import React from 'react'
+
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
-import { useStylesSignIn } from '..';
 import { ModalBlock } from '../../../components/ModalBlock';
 import { Notification } from '../../../components/Notification';
 import { Color } from '@material-ui/lab/Alert';
-// import { fetchSignIn } from '../../../store/ducks/user/actionCreators';
-// import { selectUserStatus } from '../../../store/ducks/user/selectors';
-// import { LoadingStatus } from '../../../store/types';
+import { useStylesSignIn } from '../../SignIn';
+import { selectUserStatus } from '../../../store/ducks/user/selectors';
+import { LoadingStatus } from '../../../store/types';
+import { fetchSignIn } from '../../../store/ducks/user/actionsCreatores';
 
 interface LoginModalProps {
     open: boolean;
@@ -35,25 +36,24 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }): React.
     const dispatch = useDispatch();
 
     const openNotificationRef = React.useRef<(text: string, type: Color) => void>(() => { });
-    // const loadingStatus = useSelector(selectUserStatus);
+    const loadingStatus = useSelector(selectUserStatus);
 
     const { control, handleSubmit, errors } = useForm<LoginFormProps>({
         resolver: yupResolver(LoginFormSchema)
     });
 
     const onSubmit = async (data: LoginFormProps) => {
-        // dispatch(fetchSignIn(data));
-        console.log(data);
+        dispatch(fetchSignIn(data));
     };
 
-    // React.useEffect(() => {
-    //     if (loadingStatus === LoadingStatus.SUCCESS) {
-    //         openNotificationRef.current('Авторизация успешна!', 'success');
-    //         onClose();
-    //     } else if (loadingStatus === LoadingStatus.ERROR) {
-    //         openNotificationRef.current('Неверный логин или пароль', 'error');
-    //     }
-    // }, [loadingStatus]);
+    React.useEffect(() => {
+        if (loadingStatus === LoadingStatus.SUCCESS) {
+            openNotificationRef.current('Авторизация успешна!', 'success');
+            onClose();
+        } else if (loadingStatus ===  LoadingStatus.ERROR) {
+            openNotificationRef.current('Неверный логин или пароль', 'error');
+        }
+    }, [loadingStatus]);
 
     return <Notification>
         {

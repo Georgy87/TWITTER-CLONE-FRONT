@@ -1,4 +1,4 @@
-export enum LoadingState {
+export enum LoadingStatus {
     LOADED = 'LOADED',
     LOADING = 'LOADING',
     ERROR = 'ERROR',
@@ -14,5 +14,5 @@ export type Tag = {
 
 export type TagsState = {
     items: Tag[],
-    loadingState: LoadingState;
+    LoadingStatus: LoadingStatus;
 }
