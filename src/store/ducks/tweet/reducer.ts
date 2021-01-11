@@ -1,9 +1,10 @@
 import produce, { Draft } from "immer";
+import { LoadingState } from "../../types";
 
 import { TweetDataState } from "../tweet/contracts/state";
 import { TweetActions } from "./actionTypes";
 import { TweetActionsType } from "./actionTypes";
-import { LoadingState } from "./contracts/state";
+
 
 const  initialTweetState: TweetDataState = {
     tweet: undefined,

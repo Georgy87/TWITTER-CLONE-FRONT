@@ -1,30 +1,22 @@
-export enum LoadingState {
-    LOADED = 'LOADED',
-    LOADING = 'LOADING',
-    ERROR = 'ERROR',
-    NEVER = 'NEVER',
+import { LoadingState } from "../../../types";
+
+export interface User {
+    _id?: string;
+    email: string;
+    fullname: string;
+    username: string;
+    password: string;
+    confirmHash: string;
+    confirmed?: boolean;
+    location?: string;
+    about?: string;
+    website?: string;
 }
 
-export enum AddFormState {
-    LOADING = 'LOADING',
-    ERROR = 'ERROR',
-    NEVER = 'NEVER',
+export interface UserState {
+    data: User | undefined;
+    status: LoadingState;
 }
 
 
-export type Tweet = {
-    _id: string;
-    text: string;
-    createdAt: string;
-	user: {
-		fullname: string;
-		username: string;
-		avatarUrl: string;
-    },
-}
 
-export type TweetsState = {
-    items: Tweet[],
-    loadingState: LoadingState;
-    addFormState: AddFormState;
-}

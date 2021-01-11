@@ -1,41 +1,41 @@
 import produce, { Draft } from "immer";
-import { TweetsActionsType } from "./actionTypes";
-import { TweetsActions } from "./actionTypes";
-import { AddFormState, TweetsState } from "./contracts/state";
-import { LoadingState } from "./contracts/state";
+import { UserActions } from "./actionsCreatores";
 
-const initialTweetsState: TweetsState = {
-    items: [],
-    loadingState: LoadingState.NEVER,
-    addFormState: AddFormState.NEVER,
+import { LoadingState } from "../../types";
+import { UserState } from './contracts/state';
+import { UserActionsType } from "./actionTypes";
+
+const initialTweetsState: UserState = {
+    data: undefined,
+    status: LoadingState.NEVER,
 };
 
 export const tweetsReducer = produce(
-    (draft: Draft<TweetsState>, action: TweetsActions) => {
+    (draft: Draft<UserState>, action: UserActions) => {
         switch (action.type) {
-            case TweetsActionsType.FETCH_TWEETS:
-                draft.items = [];
-                draft.loadingState = LoadingState.LOADING;
+            case UserActionsType.SET_USER_DATA:
+                draft.data = undefined;
+                draft.status = LoadingState.LOADING;
                 break;
-            case TweetsActionsType.SET_TWEETS:
-                draft.items = action.payload;
-                draft.loadingState = LoadingState.LOADED;
-                break;
-            case TweetsActionsType.SET_LOADING_STATE:
-                draft.loadingState = action.payload;
-                break;
-            case TweetsActionsType.FETCH_ADD_TWEET:
-                draft.addFormState = AddFormState.LOADING;
-                break;
-            case TweetsActionsType.ADD_TWEET:
-                draft.items.unshift(action.payload);
-                draft.addFormState = AddFormState.NEVER;
-                break;
-            case TweetsActionsType.SET_ADD_FORM_STATE:
-                draft.addFormState = action.payload;
-                break;
-            default:
-                break;
+            // case TweetsActionsType.SET_TWEETS:
+            //     draft.items = action.payload;
+            //     draft.loadingState = LoadingState.LOADED;
+            //     break;
+            // case TweetsActionsType.SET_LOADING_STATE:
+            //     draft.loadingState = action.payload;
+            //     break;
+            // case TweetsActionsType.FETCH_ADD_TWEET:
+            //     draft.addFormState = AddFormState.LOADING;
+            //     break;
+            // case TweetsActionsType.ADD_TWEET:
+            //     draft.items.unshift(action.payload);
+            //     draft.addFormState = AddFormState.NEVER;
+            //     break;
+            // case TweetsActionsType.SET_ADD_FORM_STATE:
+            //     draft.addFormState = action.payload;
+            //     break;
+            // default:
+            //     break;
         }
     },
     initialTweetsState
