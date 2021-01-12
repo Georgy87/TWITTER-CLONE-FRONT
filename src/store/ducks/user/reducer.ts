@@ -7,7 +7,7 @@ import { UserActionsType } from "./actionTypes";
 
 const initialTweetsState: UserState = {
     data: undefined,
-    status: LoadingStatus.NEVER,
+    status: LoadingStatus.NEVER
 };
 
 export const userReducer = produce(

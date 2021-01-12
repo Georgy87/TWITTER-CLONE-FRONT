@@ -8,7 +8,6 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import { ModalBlock } from '../../../components/ModalBlock';
-import { Notification } from '../../../components/Notification';
 import { Color } from '@material-ui/lab/Alert';
 import { useStylesSignIn } from '../../SignIn';
 import { selectUserStatus } from '../../../store/ducks/user/selectors';
@@ -21,15 +20,11 @@ interface LoginModalProps {
 }
 
 export interface LoginFormProps {
-    fullname: string;
-    username: string;
     email: string;
     password: string;
 }
 
 const LoginFormSchema = yup.object().shape({
-    fullname: yup.string().required('Введите свое полное имя'),
-    username: yup.string().required('Введите логин'),
     email: yup.string().email('Неверная почта').required('Введите почту'),
     password: yup.string().min(6, '​Минимальная длина пароля 6 символов').required(),
 });
@@ -53,70 +48,64 @@ export const LoginModal: React.FC<LoginModalProps> = ({ open, onClose }): React.
         if (loadingStatus === LoadingStatus.SUCCESS) {
             openNotificationRef.current('Авторизация успешна!', 'success');
             onClose();
-        } else if (loadingStatus ===  LoadingStatus.ERROR) {
+        } else if (loadingStatus === LoadingStatus.ERROR) {
             openNotificationRef.current('Неверный логин или пароль', 'error');
         }
     }, [loadingStatus]);
 
-    return <Notification>
-        {
-            callback => {
-                openNotificationRef.current = callback;
-                return (
-                    <ModalBlock
-                        visible={open}
-                        onClose={onClose}
-                        classes={classes}
-                        title="Войти в аккаунт">
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <FormControl className={classes.loginFormControl} component="fieldset" fullWidth>
-                                <FormGroup aria-label="position" row>
-                                    <Controller
-                                        as={TextField}
-                                        control={control}
-                                        name="email"
-                                        className={classes.loginSideField}
-                                        id="email"
-                                        label="E-Mail"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        variant="filled"
-                                        type="email"
-                                        defaultValue=""
-                                        helperText={errors.email?.message}
-                                        error={!!errors.email}
-                                        fullWidth
-                                        autoFocus
-                                    />
-                                    <Controller
-                                        as={TextField}
-                                        control={control}
-                                        name="password"
-                                        className={classes.loginSideField}
-                                        id="password"
-                                        label="Пароль"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                        variant="filled"
-                                        type="password"
-                                        defaultValue=""
-                                        helperText={errors.password?.message}
-                                        error={!!errors.password}
-                                        fullWidth
-                                    />
-                                    <Button type="submit" variant="contained" color="primary" fullWidth>
-                                        Войти
+    return (
+        <ModalBlock
+            visible={open}
+            onClose={onClose}
+            classes={classes}
+            title="Войти в аккаунт">
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <FormControl className={classes.loginFormControl} component="fieldset" fullWidth>
+                    <FormGroup aria-label="position" row>
+                        <Controller
+                            as={TextField}
+                            control={control}
+                            name="email"
+                            className={classes.loginSideField}
+                            id="email"
+                            label="E-Mail"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            variant="filled"
+                            type="email"
+                            defaultValue=""
+                            helperText={errors.email?.message}
+                            error={!!errors.email}
+                            fullWidth
+                            autoFocus
+                        />
+                        <Controller
+                            as={TextField}
+                            control={control}
+                            name="password"
+                            className={classes.loginSideField}
+                            id="password"
+                            label="Пароль"
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                            variant="filled"
+                            type="password"
+                            defaultValue=""
+                            helperText={errors.password?.message}
+                            error={!!errors.password}
+                            fullWidth
+                        />
+                        <Button disabled={loadingStatus === LoadingStatus.LOADING} type="submit" variant="contained" color="primary" fullWidth>
+                            Войти
                                     </Button>
-                                </FormGroup>
-                            </FormControl>
-                        </form>
-                    </ModalBlock>
-                )
-            }
-        }
-    </Notification>
+                    </FormGroup>
+                </FormControl>
+            </form>
+        </ModalBlock>
+    )
+
 }
 
 
