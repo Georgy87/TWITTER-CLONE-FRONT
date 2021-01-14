@@ -13,6 +13,8 @@ import { fetchAddTweet } from '../store/ducks/tweets/actionsCreatores';
 import { selectAddFormState } from '../store/ducks/tweets/selectors';
 import { AddFormState } from '../store/ducks/tweets/contracts/state';
 import Alert from '@material-ui/lab/Alert';
+import { UploadImages } from './UploadImages';
+import { uploadImage } from '../utils/uploadImage';
 
 interface AddTweetFormProps {
     classes: ReturnType<typeof useHomeStyles>;
@@ -21,11 +23,18 @@ interface AddTweetFormProps {
 
 const MAX_LENGTH = 280;
 
+export interface ImageObj {
+    file: File;
+    blobUrl: string;
+}
+
 export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: AddTweetFormProps): React.ReactElement => {
     const dispatch = useDispatch();
     const addFormState = useSelector(selectAddFormState);
-    
+
     const [text, setText] = React.useState<string>('');
+    const [images, setImages] = React.useState<ImageObj[]>([]);
+
     const textLimitPercent = Math.round(text.length / 280 * 100);
     const textCount = MAX_LENGTH - text.length;
 
@@ -35,14 +44,23 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: 
         }
     }
 
-    const handleClickAddTweet = (): void => {
-        dispatch(fetchAddTweet(text));
+    const handleClickAddTweet = async (): Promise<void> => {
+        let urls = [];
+        for (let i = 0; i < images.length; i++) {
+            const file = images[i].file;
+
+            const { url } = await uploadImage(file);
+            console.log(url);
+
+            urls.push(url);
+        }
+
+        dispatch(fetchAddTweet({ text, images: urls }));
         setText('');
     }
 
     return (
         <div>
-
             <div className={classes.addFormBody}>
                 <Avatar
                     className={classes.tweetAvatar}
@@ -60,12 +78,7 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: 
             </div>
             <div className={classes.addFormBottom}>
                 <div className={classNames(classes.tweetFooter, classes.addFormBottomActions)}>
-                    <IconButton color="primary">
-                        <ImageOutlinedIcon style={{ fontSize: 26 }} />
-                    </IconButton>
-                    <IconButton color="primary">
-                        <EmojiIcon style={{ fontSize: 26 }} />
-                    </IconButton>
+                    <UploadImages images={images} onChangeImages={setImages} />
                 </div>
                 <div className={classes.addFormBottomRight}>
                     {text && (
@@ -100,7 +113,6 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: 
                                 'Твитнуть'
                             )}
                     </Button>
-
                 </div>
             </div>
             {addFormState === AddFormState.ERROR && (<Alert severity="error">

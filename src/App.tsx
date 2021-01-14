@@ -4,12 +4,10 @@ import { Home } from './pages/Home';
 import { Layout } from './pages/Layout';
 import { SignIn } from './pages/SignIn';
 import { UserPage } from './pages/User';
-import { AuthApi } from './services/api/authApi';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUserData, setUserData } from './store/ducks/user/actionsCreatores';
-import { selectIsAuth, selectUserIsLoaded, selectUserStatus } from './store/ducks/user/selectors';
+import { fetchUserData } from './store/ducks/user/actionsCreatores';
+import { selectIsAuth, selectUserStatus } from './store/ducks/user/selectors';
 import { LoadingStatus } from './store/types';
-import { CircularProgress } from '@material-ui/core';
 import { useHomeStyles } from './pages/theme';
 import TwitterIcon from '@material-ui/icons/Twitter';
 
@@ -23,6 +21,7 @@ function App() {
 
     React.useEffect(() => {
         dispatch(fetchUserData());
+
     }, []);
 
     React.useEffect(() => {

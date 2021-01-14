@@ -13,7 +13,7 @@ export const addTweet = (payload: Tweet): AddTweetActionInterface => ({
     payload
 });
 
-export const fetchAddTweet = (payload: string): FetchAddTweetActionInterface => ({
+export const fetchAddTweet = (payload: {text: string, images: string[]}): FetchAddTweetActionInterface => ({
     type: TweetsActionsType.FETCH_ADD_TWEET,
     payload
 });
