@@ -267,20 +267,25 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
         display: 'flex',
         alignItems: 'center',
         marginTop: 20,
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
     },
     imagesListItem: {
         width: 50,
         height: 50,
-        borderRadius: 6,
         marginRight: 10,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
         marginBottom: 10,
+        position: 'relative',
+        '& img': {
+            width: '100%',
+            height: '100%',
+            'object-fit': 'cover',
+            borderRadius: 6,
+        },
         '& svg path': {
             fill: 'white',
-        }
+        },
     },
+
     imagesListItemRemove: {
         position: 'relative',
         top: -8,

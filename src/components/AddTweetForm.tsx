@@ -9,7 +9,7 @@ import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import EmojiIcon from '@material-ui/icons/SentimentSatisfiedOutlined';
 import { useHomeStyles } from '../pages/theme';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchAddTweet } from '../store/ducks/tweets/actionsCreatores';
+import { fetchAddTweet, setAddFormState } from '../store/ducks/tweets/actionsCreatores';
 import { selectAddFormState } from '../store/ducks/tweets/selectors';
 import { AddFormState } from '../store/ducks/tweets/contracts/state';
 import Alert from '@material-ui/lab/Alert';
@@ -28,7 +28,7 @@ export interface ImageObj {
     blobUrl: string;
 }
 
-export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: AddTweetFormProps): React.ReactElement => {
+export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: AddTweetFormProps) => {
     const dispatch = useDispatch();
     const addFormState = useSelector(selectAddFormState);
 
@@ -46,17 +46,15 @@ export const AddTweetForm: React.FC<AddTweetFormProps> = ({ classes, maxRows }: 
 
     const handleClickAddTweet = async (): Promise<void> => {
         let urls = [];
+        dispatch(setAddFormState(AddFormState.LOADING));
         for (let i = 0; i < images.length; i++) {
             const file = images[i].file;
-
-            const { url } = await uploadImage(file);
-            console.log(url);
-
-            urls.push(url);
+            const data = await uploadImage(file);
+            urls.push(data.url);
         }
-
         dispatch(fetchAddTweet({ text, images: urls }));
         setText('');
+        setImages([]);
     }
 
     return (

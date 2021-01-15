@@ -13,13 +13,13 @@ export const TweetsApi = {
     },
     async fetchTweetData(_id: string): Promise<Tweet> {
         const { data } = await axios.get<Response<Tweet>>(`/tweets/${_id}`);
-        console.log(data);
         return data.data;
     },
-    async addTweet(payload: string): Promise<Tweet> {
-        const { data } = await axios.post<Response<Tweet>>("/tweets", {
-            text: payload,
-        });
+    async addTweet(payload: {
+        text: string;
+        images: string[]
+    }): Promise<Tweet> {
+        const { data } = await axios.post<Response<Tweet>>("/tweets", payload);
         return data.data;
     },
 };

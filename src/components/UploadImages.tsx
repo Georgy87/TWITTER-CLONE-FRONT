@@ -1,23 +1,21 @@
 import React from 'react'
-import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
-import { uploadImage } from '../utils/uploadImage';
 import { useHomeStyles } from '../pages/theme';
-import ClearIcon from '@material-ui/icons/Clear';
-import IconButton from '@material-ui/core/IconButton';
 import { ImageObj } from './AddTweetForm';
+import { ImageList } from './ImageList';
+import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
+import { IconButton } from '@material-ui/core';
 
 interface UploadImageProps {
     images: ImageObj[];
-    onChangeImages: (callback: (prev:  ImageObj[]) =>  ImageObj[]) => void;
+    onChangeImages: (callback: (prev: ImageObj[]) => ImageObj[]) => void;
 }
 
 export const UploadImages: React.FC<UploadImageProps> = ({ images, onChangeImages }) => {
-
-    const inputRef = React.useRef<HTMLInputElement>(null);
     const classes = useHomeStyles();
-
+    const inputRef = React.useRef<HTMLInputElement>(null);
     const handleClickImage = () => {
         if (inputRef.current) {
+            console.log(inputRef.current)
             inputRef.current.click();
         }
     }
@@ -58,15 +56,7 @@ export const UploadImages: React.FC<UploadImageProps> = ({ images, onChangeImage
                 <ImageOutlinedIcon style={{ fontSize: 26 }} />
             </IconButton>
             <input ref={inputRef} type="file" hidden id="upload-input" />
-            <div className={classes.imagesList}>
-                {images.map(url => (
-                    <div key={url.blobUrl} className={classes.imagesListItem} style={{ backgroundImage: `url(${url.blobUrl})` }}>
-                        <IconButton className={classes.imagesListItemRemove} onClick={(): void => removeImage(url.blobUrl)} color="primary">
-                            <ClearIcon style={{ fontSize: 15 }} />
-                        </IconButton>
-                    </div>
-                ))}
-            </div>
+            <ImageList removeImage={removeImage}  images={images.map((obj) => obj.blobUrl)} classes={classes} />
         </div>
     )
 }

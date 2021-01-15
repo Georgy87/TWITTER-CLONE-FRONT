@@ -29,7 +29,7 @@ export const Home = (): React.ReactElement => {
 	const classes = useHomeStyles();
 	const dispatch = useDispatch();
 	const tweets = useSelector(selectTweetsItems);
-	console.log(tweets);
+	
 	const isLoading = useSelector(selectIsTweetsLoading);
 
 	// const isLoaded = useSelector(selectIsTweetsLoaded);
@@ -72,7 +72,7 @@ export const Home = (): React.ReactElement => {
 					</div>
 				) : (
 						tweets.map((tweet) => (
-							<Tweet id={tweet._id} key={tweet._id} {...tweet} classes={classes} />
+							<Tweet id={tweet._id} key={tweet._id} {...tweet} images={tweet.images} classes={classes} />
 						)))}
 			</Route>
 			<Route path="/home/tweet/:id" component={FullTweet} />

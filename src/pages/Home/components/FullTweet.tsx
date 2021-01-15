@@ -13,6 +13,7 @@ import RepostIcon from '@material-ui/icons/RepeatOutlined';
 import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ShareIcon from '@material-ui/icons/ReplyOutlined';
 import ruLang from 'date-fns/locale/ru'
+import { ImageList } from '../../../components/ImageList';
 
 export const FullTweet: React.FC = (): React.ReactElement | null => {
     const classes = useHomeStyles();
@@ -35,6 +36,13 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
         }
 
     }, []);
+
+    React.useEffect(() => {
+        if (!isLoading) {
+            // mediumZoom('.tweet-images img');
+        }
+    }, [isLoading]);
+
 
     if (isLoading) {
         return <div className={classes.tweetsCentred}>
@@ -60,6 +68,9 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
                 </div>
                 <Typography className={classes.fullTweetText} gutterBottom>
                     {tweetData.text}
+                    <div className="tweet-images">
+                        {tweetData.images && <ImageList classes={classes} images={tweetData.images} />}
+                    </div>
                 </Typography>
                 <Typography>
                     <span className={classes.tweetUserName}>{format(new Date(tweetData.createdAt), 'H:mm', { locale: ruLang })} · </span>

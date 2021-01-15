@@ -10,12 +10,14 @@ import { Avatar, IconButton, Menu, MenuItem, Paper, Typography } from '@material
 import { useHomeStyles } from '../pages/theme';
 import { Link, useHistory } from 'react-router-dom';
 import { formDate } from '../utils/formatDate';
+import { ImageList } from './ImageList';
 
 interface TweetProps {
 	id: string;
 	text: string;
 	classes: ReturnType<typeof useHomeStyles>;
 	createdAt: string;
+	images?: string[];
 	user: {
 		fullname: string;
 		username: string;
@@ -28,6 +30,7 @@ export const Tweet: React.FC<TweetProps> = ({
 	text,
 	user,
 	classes,
+	images,
 	createdAt
 }: TweetProps): React.ReactElement => {
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -93,6 +96,7 @@ export const Tweet: React.FC<TweetProps> = ({
 					</div>
 					<Typography variant="body1" gutterBottom>
 						{text}
+						{images && <ImageList classes={classes} images={images} />}
 					</Typography>
 					<div className={classes.tweetFooter}>
 						<div>
