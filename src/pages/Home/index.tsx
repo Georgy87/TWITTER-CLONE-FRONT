@@ -29,7 +29,7 @@ export const Home = (): React.ReactElement => {
 	const classes = useHomeStyles();
 	const dispatch = useDispatch();
 	const tweets = useSelector(selectTweetsItems);
-	
+
 	const isLoading = useSelector(selectIsTweetsLoading);
 
 	// const isLoaded = useSelector(selectIsTweetsLoaded);
@@ -71,9 +71,9 @@ export const Home = (): React.ReactElement => {
 						<CircularProgress />
 					</div>
 				) : (
-						tweets.map((tweet) => (
-							<Tweet id={tweet._id} key={tweet._id} {...tweet} images={tweet.images} classes={classes} />
-						)))}
+					tweets.map((tweet) => (
+						<Tweet id={tweet._id} key={tweet._id} {...tweet} images={tweet.images} classes={classes} />
+					)))}
 			</Route>
 			<Route path="/home/tweet/:id" component={FullTweet} />
 		</Paper>

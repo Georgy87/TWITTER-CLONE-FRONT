@@ -129,7 +129,7 @@ export const SignIn: React.FC = (): React.ReactElement => {
                     <TwitterIcon color="primary" className={classes.loginSideTwitterIcon} />
                     <Typography className={classes.loginSideTitle} gutterBottom variant="h4">
                         Узнайте, что происходит в мире прямо сейчас
-                </Typography>
+                    </Typography>
                     <Typography>
                         <b>Присоединяйтесь к Твиттеру прямо сейчас!</b>
                     </Typography>

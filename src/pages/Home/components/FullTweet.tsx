@@ -1,5 +1,5 @@
+import React from 'react';
 import { CircularProgress, IconButton, Paper, Typography } from '@material-ui/core';
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchTweet, setTweet } from '../../../store/ducks/tweet/actionsCreatores';
@@ -12,8 +12,9 @@ import CommentIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import RepostIcon from '@material-ui/icons/RepeatOutlined';
 import LikeIcon from '@material-ui/icons/FavoriteBorderOutlined';
 import ShareIcon from '@material-ui/icons/ReplyOutlined';
-import ruLang from 'date-fns/locale/ru'
+import ruLang from 'date-fns/locale/ru';
 import { ImageList } from '../../../components/ImageList';
+import mediumZoom from 'medium-zoom';
 
 export const FullTweet: React.FC = (): React.ReactElement | null => {
     const classes = useHomeStyles();
@@ -39,7 +40,7 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
 
     React.useEffect(() => {
         if (!isLoading) {
-            // mediumZoom('.tweet-images img');
+            mediumZoom('.tweet-images img');
         }
     }, [isLoading]);
 

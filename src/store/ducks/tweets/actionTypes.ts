@@ -14,6 +14,7 @@ export enum TweetsActionsType {
     FETCH_ADD_TWEET = "tweet/FETCH-ADD-TWEET",
     ADD_TWEET = "tweet/ADD-TWEET",
     SET_ADD_FORM_STATE = "tweet/SET_ADD_FORM_STATE",
+    FETCH_REMOVE_TWEET = "tweet/FETCH_REMOVE-TWEET",
 }
 
 export interface SetTweetsActionInterface {
@@ -47,10 +48,16 @@ export interface AddTweetActionInterface {
     payload: Tweet;
 }
 
+export interface FetchRemoveTweetActionInterface {
+    type: TweetsActionsType.FETCH_REMOVE_TWEET;
+    payload: string;
+}
+
 export type TweetsActions =
     | SetTweetsActionInterface
     | SetTweetsLoadingStatusActionInterface
     | FetchTweetsActionInterface
     | FetchAddTweetActionInterface
     | AddTweetActionInterface
-    | SetAddFormStateActionInterface;
+    | SetAddFormStateActionInterface
+    | FetchRemoveTweetActionInterface;

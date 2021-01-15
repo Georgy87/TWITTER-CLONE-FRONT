@@ -59,7 +59,6 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({ open, onClose }): 
         }
     }, [loadingStatus]);
 
-
     return (
         <ModalBlock
             visible={open}
@@ -165,5 +164,4 @@ export const RegisterModal: React.FC<RegisterModalProps> = ({ open, onClose }): 
             </form>
         </ModalBlock>
     )
-
 }

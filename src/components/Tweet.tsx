@@ -11,6 +11,8 @@ import { useHomeStyles } from '../pages/theme';
 import { Link, useHistory } from 'react-router-dom';
 import { formDate } from '../utils/formatDate';
 import { ImageList } from './ImageList';
+import { removeTweet } from '../store/ducks/tweets/actionsCreatores';
+import { useDispatch } from 'react-redux';
 
 interface TweetProps {
 	id: string;
@@ -36,6 +38,7 @@ export const Tweet: React.FC<TweetProps> = ({
 	const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 	const open = Boolean(anchorEl);
 	const history = useHistory();
+	const dispatch = useDispatch();
 
 	const handleClickTweet = (event: React.MouseEvent<HTMLAnchorElement>): void => {
 		event.preventDefault();
@@ -48,8 +51,16 @@ export const Tweet: React.FC<TweetProps> = ({
 		setAnchorEl(event.currentTarget);
 	};
 
-	const handleClose = () => {
+	const handleClose = (event: React.MouseEvent<HTMLElement>): void => {
+		event.stopPropagation();
+		event.preventDefault();
 		setAnchorEl(null);
+	};
+
+	const handleRemove = (event: React.MouseEvent<HTMLElement>): void => {
+		handleClose(event);
+		// if (window.confirm('Вы действительно хотите удалить твит?')) {
+		dispatch(removeTweet(id));
 	};
 
 	return (
@@ -64,33 +75,21 @@ export const Tweet: React.FC<TweetProps> = ({
 					<div className={classes.tweetHeader}>
 						<div>
 							<b>{user.fullname}</b>&nbsp;
-              <span className={classes.tweetUserName}>@{user.username}</span>&nbsp;
-              <span className={classes.tweetUserName}>·</span>&nbsp;
-              <span className={classes.tweetUserName}>{formDate(new Date(createdAt))}</span>
+							<span className={classes.tweetUserName}>@{user.username}</span>&nbsp;
+							<span className={classes.tweetUserName}>·</span>&nbsp;
+							<span className={classes.tweetUserName}>{formDate(new Date(createdAt))}</span>
 						</div>
-						<div className={classes.tweetPopupMenu}>
+						<div>
 							<IconButton
 								aria-label="more"
 								aria-controls="long-menu"
 								aria-haspopup="true"
-								onClick={handleClick}
-							>
+								onClick={handleClick}>
 								<MoreVertIcon />
 							</IconButton>
-							<Menu
-								id="long-menu"
-								anchorEl={anchorEl}
-								keepMounted
-								open={open}
-								onClose={handleClose}
-
-							>
-								<MenuItem onClick={handleClose}>
-									Редактировать
-                </MenuItem>
-								<MenuItem onClick={handleClose}>
-									Удалить твит
-                </MenuItem>
+							<Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+								<MenuItem onClick={handleClose}>Редактировать</MenuItem>
+								<MenuItem onClick={handleRemove}>Удалить твит</MenuItem>
 							</Menu>
 						</div>
 					</div>
