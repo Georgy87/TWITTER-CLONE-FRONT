@@ -16,12 +16,12 @@ import ruLang from 'date-fns/locale/ru';
 import { ImageList } from '../../../components/ImageList';
 import mediumZoom from 'medium-zoom';
 
-export const FullTweet: React.FC = (): React.ReactElement | null => {
+export const FullTweet: React.FC = () => {
     const classes = useHomeStyles();
     const tweetData = useSelector(selectTweetData);
     const isLoading = useSelector(selectIsTweetLoading);
+
     const dispatch = useDispatch();
-    console.log(tweetData);
 
     const params: { id?: string } = useParams();
 
@@ -35,7 +35,7 @@ export const FullTweet: React.FC = (): React.ReactElement | null => {
         return () => {
             dispatch(setTweet(undefined));
         }
-
+        
     }, []);
 
     React.useEffect(() => {

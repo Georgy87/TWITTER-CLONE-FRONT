@@ -4,7 +4,6 @@ import { ImageObj } from './AddTweetForm';
 import { ImageList } from './ImageList';
 import ImageOutlinedIcon from '@material-ui/icons/ImageOutlined';
 import { IconButton } from '@material-ui/core';
-
 interface UploadImageProps {
     images: ImageObj[];
     onChangeImages: (callback: (prev: ImageObj[]) => ImageObj[]) => void;
