@@ -8,12 +8,15 @@ import {  FetchAddTweetActionInterface, FetchRemoveTweetActionInterface, TweetsA
 
 export function* fetchTweetsRequest() {
     try {
-        const items = yield call(TweetsApi.fetchTweets);
-        yield put(setTweets(items));
+      const pathname = window.location.pathname;
+      const userId = pathname.includes('/user') ? pathname.split('/').pop() : undefined;
+      const items = yield call(TweetsApi.fetchTweets, userId);
+      yield put(setTweets(items));
     } catch (error) {
-        yield put(setTweetsLoadingStatus(LoadingStatus.ERROR));
+      yield put(setTweetsLoadingStatus(LoadingStatus.ERROR));
     }
-}
+  }
+
 
 export function* fetchAddTweetsRequest({payload}: FetchAddTweetActionInterface) {
     try {

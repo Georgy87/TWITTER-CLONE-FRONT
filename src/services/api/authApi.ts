@@ -24,7 +24,11 @@ export const AuthApi = {
     async getMe(): Promise<ResponseApi> {
         const { data } = await axios.get<ResponseApi>('/users/me');
         return data;
-    }
+    },
+    async getUserInfo(userId: string): Promise<ResponseApi> {
+        const { data } = await axios.get<ResponseApi>('/users/' + userId);
+        return data;
+    },
 }
 
 // @ts-ignore

@@ -62,20 +62,20 @@ export const Tweet: React.FC<TweetProps> = ({
 		// if (window.confirm('Вы действительно хотите удалить твит?')) {
 		dispatch(removeTweet(id));
 	};
+	console.log(user?.fullname)
 
 	return (
 		<a onClick={handleClickTweet} className={classes.tweetWrapper} href={`/home/tweet/${id}`}>
 			<Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant="outlined">
-				<Avatar
+				{user && <Avatar
 					className={classes.tweetAvatar}
-					// alt={`Аватарка пользователя ${user?.fullname}`}
-					src={user.avatarUrl}
-				/>
+					alt={`Аватарка пользователя ${user?.fullname}`}
+				/>}
 				<div className={classes.tweetContent}>
 					<div className={classes.tweetHeader}>
 						<div>
-							<b>{user.fullname}</b>&nbsp;
-							<span className={classes.tweetUserName}>@{user.username}</span>&nbsp;
+							{user && (<b>{user.fullname}</b>)}
+							{user && <span className={classes.tweetUserName}>@{user.username}</span>}
 							<span className={classes.tweetUserName}>·</span>&nbsp;
 							<span className={classes.tweetUserName}>{formDate(new Date(createdAt))}</span>
 						</div>

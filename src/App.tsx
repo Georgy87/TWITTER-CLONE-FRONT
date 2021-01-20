@@ -57,8 +57,8 @@ function App() {
                 <Route path="/signin" component={SignIn} exact />
                 <Layout>
                     <Route path="/home" component={Home} />
-                    <Route path="/user/:name" component={UserPage} />
-                    <Route path="/user/activate/:hash" component={ActivatePage} />
+                    <Route path="/user/:name" component={UserPage} exact />
+                    <Route path="/user/activate/:hash" component={ActivatePage} exact/>
                 </Layout>
             </Switch>
 
