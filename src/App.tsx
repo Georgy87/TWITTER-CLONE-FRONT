@@ -10,6 +10,7 @@ import { selectIsAuth, selectUserStatus } from './store/ducks/user/selectors';
 import { LoadingStatus } from './store/types';
 import { useHomeStyles } from './pages/theme';
 import TwitterIcon from '@material-ui/icons/Twitter';
+import { ActivatePage } from './pages/ActivatePage';
 
 function App() {
     const classes = useHomeStyles();
@@ -17,18 +18,27 @@ function App() {
     const dispatch = useDispatch();
     const isAuth = useSelector(selectIsAuth);
     const loadingStatus = useSelector(selectUserStatus);
-    const isReady = loadingStatus != LoadingStatus.NEVER && loadingStatus != LoadingStatus.LOADING;
+    const isReady = loadingStatus !== LoadingStatus.NEVER && loadingStatus !== LoadingStatus.LOADING;
 
     React.useEffect(() => {
         dispatch(fetchUserData());
 
-    }, []);
+    }, [dispatch]);
+
+    // React.useEffect(() => {
+    //     if (!isAuth && isReady) {
+
+    //         history.push('/signIn');
+    //     } else  {
+    //         history.push('/home');
+    //     }
+    // }, [isAuth, isReady]);
 
     React.useEffect(() => {
-
         if (!isAuth && isReady) {
+
             history.push('/signIn');
-        } else {
+        } else if (history.location.pathname === '/') {
             history.push('/home');
         }
     }, [isAuth, isReady]);
@@ -47,7 +57,8 @@ function App() {
                 <Route path="/signin" component={SignIn} exact />
                 <Layout>
                     <Route path="/home" component={Home} />
-                    <Route path="/user" component={UserPage} />
+                    <Route path="/user/:name" component={UserPage} />
+                    <Route path="/user/activate/:hash" component={ActivatePage} />
                 </Layout>
             </Switch>
 

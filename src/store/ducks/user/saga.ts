@@ -2,15 +2,21 @@ import { all, call, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { AuthApi } from "../../../services/api/authApi";
 import { LoadingStatus } from "../../types";
 import { setUserLoadingStatus, setUserData } from "./actionsCreatores";
-import { FetchSignInActionInterface, FetchSignUpActionInterface, FetchUserDataActionInterface, UserActionsType } from "./actionTypes";
+import {
+    FetchSignInActionInterface,
+    FetchSignUpActionInterface,
+    FetchUserDataActionInterface,
+    UserActionsType,
+} from "./actionTypes";
 
 export function* fetchSignInRequest({ payload }: FetchSignInActionInterface) {
     try {
         yield put(setUserLoadingStatus(LoadingStatus.LOADING));
 
-        const data = yield call(AuthApi.signIn, payload);
+        const { data } = yield call(AuthApi.signIn, payload);
+        console.log(data);
+        window.localStorage.setItem("token", data.token);
         yield put(setUserData(data));
-        window.localStorage.setItem('token', data.data.token);
     } catch (error) {
         yield put(setUserLoadingStatus(LoadingStatus.ERROR));
         // window.localStorage.removeItem('token');
@@ -30,7 +36,7 @@ export function* fetchSignUpRequest({ payload }: FetchSignUpActionInterface) {
 export function* fetchUserDataRequest() {
     try {
         yield put(setUserLoadingStatus(LoadingStatus.LOADING));
-        const data = yield call(AuthApi.getMe);
+        const { data } = yield call(AuthApi.getMe);
         yield put(setUserData(data));
         // window.localStorage.setItem('token', data.data.token);
     } catch (error) {

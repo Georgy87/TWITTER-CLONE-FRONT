@@ -68,7 +68,7 @@ export const Tweet: React.FC<TweetProps> = ({
 			<Paper className={classNames(classes.tweet, classes.tweetsHeader)} variant="outlined">
 				<Avatar
 					className={classes.tweetAvatar}
-					alt={`Аватарка пользователя ${user.fullname}`}
+					// alt={`Аватарка пользователя ${user?.fullname}`}
 					src={user.avatarUrl}
 				/>
 				<div className={classes.tweetContent}>

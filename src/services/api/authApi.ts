@@ -5,10 +5,14 @@ import { User, UserState } from "../../store/ducks/user/contracts/state";
 
 interface ResponseApi {
     status: string;
-    data: User;
+    data: any;
 }
 
 export const AuthApi = {
+    async verify(hash: string): Promise<ResponseApi> {
+        const { data } = await axios.get<ResponseApi>('/auth/verify?hash=' + hash);
+        return data;
+    },
     async signIn(postData: LoginFormProps): Promise<ResponseApi> {
         const { data } = await axios.post<ResponseApi>('/auth/login', { username: postData.email, password: postData.password });
         return data;

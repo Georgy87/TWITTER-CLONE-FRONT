@@ -119,15 +119,10 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
     tweetHeader: {
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'space-between'
-    },
-    tweetPopupMenu: {
-        position: 'absolute',
-        right: 0,
-        top: 0,
+        justifyContent: 'space-between',
     },
     tweetContent: {
-        flex: 1
+        flex: 1,
     },
     tweetFooter: {
         display: 'flex',
@@ -285,13 +280,24 @@ export const useHomeStyles = makeStyles((theme: Theme) => ({
             fill: 'white',
         },
     },
-
+    profileMenu: {
+        top: 'auto !important',
+        left: '17.5% !important',
+        width: '250px !important',
+        bottom: '110px !important',
+        'box-shadow': '1px 1px 10px rgba(0, 0, 0, 0.08)',
+        'border-radius': '20px',
+        border: '1px solid rgba(0, 0, 0, 0.1)',
+        '& a': {
+            color: 'black',
+            textDecoration: 'none',
+        },
+    },
     imagesListItemRemove: {
-        position: 'relative',
+        position: 'absolute',
         top: -8,
-        right: -33,
-        padding: '3px !important',
-        backgroundColor: 'red'
-    }
+        right: -6,
+        padding: '0 !important',
+        backgroundColor: '#ff4d4d !important',
+    },
 }));
-
